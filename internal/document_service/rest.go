@@ -28,6 +28,11 @@ type Rest struct {
 	DB storage.IDocumentDB
 
 	ctx context.Context
+
+	errChan chan error
+
+	// токен администратора Фиксированный, задается в конфиге приложения
+	TokenAdmin string
 }
 
 func New(c *settings.Config) (*Rest, error) {
@@ -38,9 +43,10 @@ func New(c *settings.Config) (*Rest, error) {
 	}
 
 	rest := &Rest{
-		Routes: gin.Default(),
-		Config: c,
-		DB:     db,
+		Routes:     gin.Default(),
+		Config:     c,
+		DB:         db,
+		TokenAdmin: c.TokenAdmin,
 	}
 
 	rest.initializeRoutes()

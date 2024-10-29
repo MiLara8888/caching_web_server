@@ -5,26 +5,26 @@ import "fmt"
 
 var (
 	// rest api
-	ErrorIsNotMatch         = New(0, "")
-
+	ErrorIsNotMatch  = New(0, "")
+	StatusForbidden  = New(403, "Нет прав доступа")
+	StatusBadRequest = New(400, "Некорректные параметры")
 )
 
-
 type Error struct {
-	errorCode        int    `json:"error_code"`
-	ErrorDescription string `json:"error_description"`
+	ErrorCode        int    `json:"code"`
+	ErrorDescription string `json:"text"`
 }
 
 func (e *Error) Error() string {
 	return fmt.Sprintf("err_type:%d , err_des:%s", e.Code, e.ErrorDescription)
 }
 func (e *Error) Code() int {
-	return e.errorCode
+	return e.ErrorCode
 }
 
 func New(code int, desc string) *Error {
 	return &Error{
-		errorCode:        code,
+		ErrorCode:        code,
 		ErrorDescription: desc,
 	}
 }

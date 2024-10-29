@@ -12,6 +12,7 @@ import (
 // Настройка заапуска приложения
 type Config struct {
 	ServiceName string `env:"SERVICE_NAME,required"`
+	TokenAdmin string `env:"TOKEN,required"`
 	// способ заапуска
 	Host       string `env:"HOST"`
 	Port       string `env:"PORT"`
